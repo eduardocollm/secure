@@ -1,4 +1,5 @@
 # micronaut secure example
+Example API using Micronaut with Basic Auth
 
 ## build
 ```
