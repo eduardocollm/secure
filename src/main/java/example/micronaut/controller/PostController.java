@@ -17,6 +17,11 @@ public class PostController {
 
     private static final Logger LOG = LoggerFactory.getLogger(PostController.class);
 
+    /**
+     *
+     * @param request numbers
+     * @return 'Good' if everything went well
+     */
     @Post("/numbers")
     String postIt(@Valid PostRequest request) {
         LOG.info("post request uno = {} dos = {}", request.getUno(), request.getDos());

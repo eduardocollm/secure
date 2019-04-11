@@ -10,6 +10,11 @@ import java.security.Principal;
 @Controller("/")
 public class HomeController {
 
+    /**
+     *
+     * @param principal
+     * @return principal name
+     */
     @Get("/")
     String index(Principal principal) {
         return principal.getName();
