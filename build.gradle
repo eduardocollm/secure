@@ -20,11 +20,12 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom 'io.micronaut:micronaut-bom:1.0.5'
+        mavenBom 'io.micronaut:micronaut-bom:1.1.0'
     }
 }
 
 dependencies {
+    annotationProcessor "org.projectlombok:lombok:1.16.20"
     annotationProcessor "io.micronaut:micronaut-inject-java"
     annotationProcessor "io.micronaut:micronaut-validation"
     annotationProcessor "io.micronaut.configuration:micronaut-openapi"
@@ -36,6 +37,7 @@ dependencies {
     compile "io.micronaut:micronaut-security"
     compile "io.swagger.core.v3:swagger-annotations"
     compileOnly "io.micronaut:micronaut-inject-java"
+    compileOnly "org.projectlombok:lombok:1.16.16"
     runtime "ch.qos.logback:logback-classic:1.2.3"
     testCompile "junit:junit:4.12"
     testCompile "io.micronaut:micronaut-inject-java"

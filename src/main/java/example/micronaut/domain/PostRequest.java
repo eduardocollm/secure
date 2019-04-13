@@ -1,7 +1,14 @@
 package example.micronaut.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.NotNull;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PostRequest {
 
     @NotNull(message = "uno cannot be null")
@@ -9,19 +16,4 @@ public class PostRequest {
 
     private String dos;
 
-    public String getUno() {
-        return uno;
-    }
-
-    public void setUno(String uno) {
-        this.uno = uno;
-    }
-
-    public String getDos() {
-        return dos;
-    }
-
-    public void setDos(String dos) {
-        this.dos = dos;
-    }
 }

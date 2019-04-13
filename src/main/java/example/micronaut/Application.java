@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "Secured API Example",
+                title = "secured_api-v1",
                 version = "0.0.1",
                 description = "Example secured API using Micronaut"
         )
