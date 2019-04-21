@@ -1,6 +1,11 @@
 micronaut:
   application:
     name: secure
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: api-docs/**
   security:
     enabled: true
     endpoints:

@@ -1,0 +1,219 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "secured_api-v1",
+    "description": "Example secured API using Micronaut",
+    "version": "0.0.1"
+  },
+  "paths": {
+    "/numbers": {
+      "post": {
+        "summary": "returns request",
+        "description": "returns content of request body",
+        "operationId": "postIt",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "request": {
+                    "$ref": "#/components/schemas/PostRequest"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JsonError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },
+    "/ping": {
+      "get": {
+        "description": "ping endpoint for health checks",
+        "operationId": "ping",
+        "parameters": [],
+        "responses": {
+          "default": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AbstractResource": {
+        "type": "object",
+        "properties": {
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            }
+          },
+          "embedded": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Resource"
+            }
+          }
+        }
+      },
+      "Link": {
+        "type": "object",
+        "properties": {
+          "templated": {
+            "type": "boolean"
+          },
+          "type": {
+            "$ref": "#/components/schemas/MediaType"
+          },
+          "deprecation": {
+            "type": "string",
+            "format": "uri"
+          },
+          "profile": {
+            "type": "string",
+            "format": "uri"
+          },
+          "name": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "hreflang": {
+            "type": "string"
+          }
+        }
+      },
+      "MediaType": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "subtype": {
+            "type": "string"
+          },
+          "extension": {
+            "type": "string"
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "quality": {
+            "type": "string"
+          },
+          "qualityAsNumber": {
+            "type": "number"
+          },
+          "version": {
+            "type": "string"
+          },
+          "charset": {
+            "$ref": "#/components/schemas/Charset"
+          },
+          "textBased": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Charset": {
+        "type": "object",
+        "properties": {
+          "registered": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Resource": {
+        "type": "object",
+        "properties": {
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "embedded": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "JsonError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "logref": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/AbstractResource"
+          }
+        ]
+      },
+      "PostRequest": {
+        "type": "object",
+        "properties": {
+          "uno": {
+            "type": "string"
+          },
+          "dos": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

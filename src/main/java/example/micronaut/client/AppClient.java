@@ -7,6 +7,6 @@ import io.micronaut.http.client.annotation.Client;
 @Client("/")
 public interface AppClient {
 
-    @Get("/")
+    @Get("/ping")
     String home(@Header String authorization);
 }

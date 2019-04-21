@@ -1,5 +1,6 @@
 package example.micronaut.controller
 
+import com.atlassian.oai.validator.restassured.OpenApiValidationFilter
 import io.micronaut.context.ApplicationContext
 import io.micronaut.http.HttpRequest
 import io.micronaut.http.HttpStatus
@@ -10,6 +11,8 @@ import spock.lang.AutoCleanup
 import spock.lang.Shared
 import spock.lang.Specification
 
+import static  io.restassured.RestAssured.*
+
 class PostControllerSpec extends Specification {
 
     @Shared
@@ -19,6 +22,8 @@ class PostControllerSpec extends Specification {
     @Shared
     @AutoCleanup
     HttpClient client = embeddedServer.applicationContext.createBean(HttpClient, embeddedServer.getURL())
+
+    OpenApiValidationFilter validationFilter = new OpenApiValidationFilter("openapi.json")
 
     def 'should throw a bad request exception'() {
         given:
@@ -31,6 +36,27 @@ class PostControllerSpec extends Specification {
         HttpClientResponseException e = thrown()
         HttpStatus.BAD_REQUEST == e.status
         'request.uno: uno cannot be null' == e.message
+
+    }
+
+    def "implementation should conform to api spec"() {
+        given:
+        def port = embeddedServer.getPort()
+        def requestBody = "{ \"dos\": \"hola\" }"
+        def request = given()
+                .port(port)
+                .contentType("application/json")
+                .auth().preemptive().basic("sherlock", "password")
+                .body(requestBody)
+                .filter(validationFilter)
+        when:
+            def response = request.when().post("/numbers")
+
+        then:
+            response
+                .then()
+                .assertThat()
+                .statusCode(400)
 
     }
 }

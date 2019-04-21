@@ -22,6 +22,6 @@ class AppClientSpec extends Specification {
         String encodedCreds = "sherlock:password".bytes.encodeBase64().toString()
         String resp = client.home("Basic ${encodedCreds}")
         then:
-        resp == "sherlock"
+        resp == "ok"
     }
 }

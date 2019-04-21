@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.info.Info;
                 description = "Example secured API using Micronaut"
         )
 )
+
 public class Application {
 
     public static void main(String[] args) {
